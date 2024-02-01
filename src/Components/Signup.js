@@ -1,7 +1,8 @@
-import {useState} from react;
-import 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
-function SignUp(){
+function SignUp() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,10 +23,11 @@ function SignUp(){
     // Add your signup logic here (e.g., API call)
     console.log('Form submitted:', formData);
   };
-return (
+
+  return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h2 className='header'>Foody Partner</h2>
+      <h2 className='header'>Foody Partner</h2>
         <div className="form-group">
           <input
             type="text"
@@ -76,6 +78,9 @@ return (
         </div>
         <button type="submit">Sign Up</button>
       </form>
+      <p>
+        Already have an account? <Link to="/">Go to Home</Link>
+      </p>
     </div>
   );
 }
