@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import axios from 'axios';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -20,8 +21,19 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your signup logic here (e.g., API call)
     console.log('Form submitted:', formData);
+    const Data = new FormData(e.currentTarget);
+    axios.post('http://localhost:8081/insert',
+    {
+      FirstName : Data.get('firstName'),
+      LastName : Data.get('lastName'),
+      GSTIN : Data.get('GSTIN'),
+      Email : Data.get('email'),
+      Password : Data.get('password'),
+    }).then((res) => {
+      console.log(res.Data)
+    })
+
   };
 
   return (
@@ -32,6 +44,7 @@ function SignUp() {
           <input
             type="text"
             name="firstName"
+            id = "FirstName"
             value={formData.firstName}
             onChange={handleChange}
             placeholder="First Name"
@@ -44,6 +57,7 @@ function SignUp() {
             onChange={handleChange}
             placeholder="Last Name"
             required
+            id = "LastName"
           />
         </div>
         <div className='form-group'>
@@ -54,6 +68,7 @@ function SignUp() {
             onChange={handleChange}
             placeholder='GSTIN Number'
             required
+            id = "GSTIN"
           />
         </div>
         <div className="form-group">
@@ -63,6 +78,7 @@ function SignUp() {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
+            id = "Email"
             required
           />
         </div>
@@ -73,6 +89,7 @@ function SignUp() {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
+            id = "Password"
             required
           />
         </div>
