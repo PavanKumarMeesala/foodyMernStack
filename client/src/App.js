@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import SignUp from './Components/Signup';
-import Login from './Components/Login';   
+import Login from './Components/Login'; 
 import './App.css';
 import logo from './images/Foody.jpg';
+import Welcome from './Components/HomePage';
+import load from './Restaurants/SreeFortune';
 
 function Home() {
   return <h2>Home Page</h2>;
@@ -41,6 +43,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/HomePage" element={<Welcome />} />
+        <Route path="/restaurant/0" element={<load />} />
       </Routes>
     </div>
   );

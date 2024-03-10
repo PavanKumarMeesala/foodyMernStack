@@ -1,22 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent form submission
     console.log('Username:', username);
     console.log('Password:', password);
 
-    
+    try {
+      const response = await axios.post('http://localhost:8081/login', {
+        username,
+        password
+      });
+      if (response && response.data) {
+        console.log(response.data);
+        console.log("Login Successful");
+        navigate('/HomePage')
+      } else {
+        console.error('Error: Empty response');
+      }
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data.message : error.message);
+    }
   };
 
   return (
     <div className="login-container">
       <h2>Login</h2>
       <div className="login-form">
-        <div className="form-group">
+        <form className="form-group" onSubmit={handleLogin}>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -24,8 +42,6 @@ const Login = ({ onLogin }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </div>
-        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -33,8 +49,8 @@ const Login = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <button onClick={handleLogin}>Login</button>
+          <button type='submit'>Login</button>
+        </form>
       </div>
     </div>
   );
