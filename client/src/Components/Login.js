@@ -19,9 +19,13 @@ const Login = ({ onLogin }) => {
         password
       });
       if (response && response.data) {
-        console.log(response.data);
+        console.log(username);
         console.log("Login Successful");
-        navigate('/HomePage')
+        if (username.toLowerCase() === "admin") { // Use lowercase comparison for flexibility
+          navigate('/Admin'); // Navigate to AdminPortal if username is "admin"
+        } else {
+          navigate('/HomePage'); // Navigate to HomePage for non-admin users
+        }
       } else {
         console.error('Error: Empty response');
       }

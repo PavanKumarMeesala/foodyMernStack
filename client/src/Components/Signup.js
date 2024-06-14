@@ -9,42 +9,61 @@ function SignUp() {
     lastName: '',
     email: '',
     password: '',
+    profilePhoto: null,
   });
+  const [signupSuccess, setSignupSuccess] = useState(false); // State to track sign up success
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, files } = e.target;
+    if (name === 'profilePhoto') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    const Data = new FormData(e.currentTarget);
-    axios.post('http://localhost:8081/insert',
-    {
-      FirstName : Data.get('firstName'),
-      LastName : Data.get('lastName'),
-      GSTIN : Data.get('GSTIN'),
-      Email : Data.get('email'),
-      Password : Data.get('password'),
-    }).then((res) => {
-      console.log(res.Data)
-    })
+    
+    // Create a FormData object to store form data including the image
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    
+    // Append the profile photo to FormData
+    formDataToSend.append('image', formData.profilePhoto);
+  
+    // Send a POST request to the server with the FormData
+    axios.post('http://localhost:8081/insertImage', formDataToSend)
+      .then((res) => {
+        console.log(res.data);
+        setSignupSuccess(true); // Set signup success state to true
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+      });
+  };
+  
 
+  const handleClosePopup = () => {
+    setSignupSuccess(false); // Close the popup
   };
 
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
-      <h2 className='header'>Foody Partner</h2>
+        <h2 className='header'>Foody Partner</h2>
         <div className="form-group">
           <input
             type="text"
             name="firstName"
-            id = "FirstName"
             value={formData.firstName}
             onChange={handleChange}
             placeholder="First Name"
@@ -57,7 +76,6 @@ function SignUp() {
             onChange={handleChange}
             placeholder="Last Name"
             required
-            id = "LastName"
           />
         </div>
         <div className='form-group'>
@@ -68,7 +86,6 @@ function SignUp() {
             onChange={handleChange}
             placeholder='GSTIN Number'
             required
-            id = "GSTIN"
           />
         </div>
         <div className="form-group">
@@ -78,7 +95,6 @@ function SignUp() {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            id = "Email"
             required
           />
         </div>
@@ -89,8 +105,15 @@ function SignUp() {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            id = "Password"
             required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="file"
+            name="profilePhoto"
+            accept="image/*"
+            onChange={handleChange}
           />
         </div>
         <button type="submit">Sign Up</button>
@@ -98,6 +121,14 @@ function SignUp() {
       <p>
         Already have an account? <Link to="/">Go to Home</Link>
       </p>
+      {signupSuccess && (
+        <div className="signup-success-popup">
+          <div className="popup-content">
+            <span className="close-btn" onClick={handleClosePopup}>×</span>
+            <p>Sign Up Successful!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

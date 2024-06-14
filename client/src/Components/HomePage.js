@@ -6,6 +6,7 @@ import SoulOfSouth from '../images/SoulOfSouth.png';
 import Prime from '../images/Prime.png';
 import Asif from '../images/Asif.png';
 import Barkass from '../images/Barkass.png';
+import {Link} from 'react-router-dom';
 
 function Welcome() {
     const restaurants = [
@@ -18,11 +19,15 @@ function Welcome() {
 
     return (
         <div className="WelcomePage">
+            <Link to="/cart" className="cart-link">
+                <div className="cart-icon">🛒</div>
+            </Link>
+
             <img src={location} alt="loading" className="location-icon" />
             <div id="location">Vijaywada</div>
 
             {restaurants.map((restaurant, index) => (
-                <a key={index} href={`/restaurant/${index}`} className="container">
+                <Link key={index} to={`/restaurant/${index}`} className="container">
                     <div className="restaurant-box">
                         <img className="restaurant-image" src={restaurant.image} alt="Restaurant Image" />
                         <div className="restaurant-details">
@@ -31,7 +36,7 @@ function Welcome() {
                             <button className="order-button">Order Now</button>
                         </div>
                     </div>
-                </a>
+                </Link>
             ))}
         </div>
     );

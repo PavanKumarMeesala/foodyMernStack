@@ -5,7 +5,10 @@ import Login from './Components/Login';
 import './App.css';
 import logo from './images/Foody.jpg';
 import Welcome from './Components/HomePage';
-import load from './Restaurants/SreeFortune';
+import FoodItems from './Restaurants/SreeFortune';
+import AdminPortal from './Components/Admin';
+import Checkout from './Components/CheckOut';
+import SuccessPage from './Components/Success';
 
 function Home() {
   return <h2>Home Page</h2>;
@@ -44,7 +47,10 @@ function App() {
         <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/HomePage" element={<Welcome />} />
-        <Route path="/restaurant/0" element={<load />} />
+        <Route path="/Admin" element={<AdminPortal/>} />
+        <Route path="/restaurant/:0" element={<FoodItems />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/success" element={<SuccessPage />} />
       </Routes>
     </div>
   );

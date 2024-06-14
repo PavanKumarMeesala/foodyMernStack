@@ -57,3 +57,22 @@
 .order-button:hover {
     background-color: #e07315;
 }
+  
+  .cart-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cart-icon {
+    font-size: 48px;
+    cursor: pointer;
+}
+
+/* Add more styles as needed */
+
+
+  
