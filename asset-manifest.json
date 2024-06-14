@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/foodyMernStack/static/css/main.e47ab6c6.css",
+    "main.js": "/foodyMernStack/static/js/main.55e83d43.js",
+    "static/media/SreeFortune.png": "/foodyMernStack/static/media/SreeFortune.ad56113180268ebacedf.png",
+    "static/media/Prime.png": "/foodyMernStack/static/media/Prime.d3a91683afdb9983bf8d.png",
+    "static/media/Asif.png": "/foodyMernStack/static/media/Asif.df29da51c8693bc05738.png",
+    "static/media/SoulOfSouth.png": "/foodyMernStack/static/media/SoulOfSouth.20a04d4e7df9f67f9912.png",
+    "static/media/Barkass.png": "/foodyMernStack/static/media/Barkass.aab82799b8f0cbc97fa2.png",
+    "static/media/WebBG.jpg": "/foodyMernStack/static/media/WebBG.a88e92f8dfabd89a3b1f.jpg",
+    "static/media/Foody.jpg": "/foodyMernStack/static/media/Foody.90ce1a9f36fecbe94089.jpg",
+    "index.html": "/foodyMernStack/index.html",
+    "main.e47ab6c6.css.map": "/foodyMernStack/static/css/main.e47ab6c6.css.map",
+    "main.55e83d43.js.map": "/foodyMernStack/static/js/main.55e83d43.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e47ab6c6.css",
+    "static/js/main.55e83d43.js"
+  ]
+}
